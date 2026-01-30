@@ -24,8 +24,8 @@ app = Flask(__name__)
 # - 前端每次刷新随机切换；Service Worker + Cache-Control 做“本地缓存”
 # =========================
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-BG_DIR = r"D:\pycharm\pythonProject\flask-cms\pic"
-
+BG_DIR = os.getenv("BG_DIR", os.path.join(BASE_DIR, "pic"))
+BG_DIR = os.path.abspath(BG_DIR)
 
 def list_bg_files():
     if not os.path.isdir(BG_DIR):
@@ -2055,3 +2055,4 @@ self.addEventListener('fetch', (event) => {{
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5012"))
     app.run(host="0.0.0.0", port=port, debug=False)
+
